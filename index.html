@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aethelgard Industries | Executive Portal</title>
+    <style>
+        /* CSS styling for a sleek, corporate, mobile-friendly site */
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--primary); color: var(--text); line-height: 1.6; }
+        
+        header { background-color: var(--secondary); padding: 1.5rem; text-align: center; border-bottom: 2px solid var(--accent); }
+        header h1 { font-size: 1.8rem; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .hero { text-align: center; padding: 3rem 1rem; background: linear-gradient(to right, #0f172a, #1e293b); border-radius: 8px; margin-bottom: 2rem; }
+        .hero h2 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--accent); }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+        
+        .card { background-color: var(--secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); }
+        .card h3 { margin-bottom: 1rem; color: var(--accent); }
+        
+        .leadership ul { list-style: none; }
+        .leadership li { margin-bottom: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid #334155; }
+        .leadership span { font-weight: bold; color: var(--accent); }
+
+        .values-list { list-style: none; font-size: 1.1rem; }
+        .values-list li { margin-bottom: 0.5rem; }
+        
+        /* The Hidden Modal System */
+        footer { text-align: center; padding: 2rem; margin-top: 2rem; font-size: 0.9rem; color: #64748b; }
+        .secret-trigger { cursor: pointer; color: #475569; transition: color 0.3s; }
+        .secret-trigger:hover { color: var(--accent); }
+
+        #override-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000; padding: 1rem; }
+        .modal-content { background: var(--secondary); padding: 2rem; border-radius: 8px; text-align: center; border: 1px solid var(--accent); width: 100%; max-width: 400px; }
+        .modal-content h3 { color: #ef4444; margin-bottom: 1rem; }
+        .modal-content input { width: 100%; padding: 0.8rem; margin-bottom: 1rem; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 4px; }
+        .modal-content button { width: 100%; padding: 0.8rem; background: var(--accent); color: #0f172a; border: none; font-weight: bold; cursor: pointer; border-radius: 4px; }
+        .modal-content button:hover { background: #0ea5e9; }
+        .error-msg { color: #ef4444; font-size: 0.9rem; margin-top: 0.5rem; display: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Aethelgard Industries</h1>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h2>Shaping the Global Future</h2>
+            <p>Under the visionary guidance of our CEO, Richard Aethelgard, we are building a legacy of unmatched corporate excellence, strategic dominance, and global innovation.</p>
+        </section>
+
+        <section class="grid">
+            <!-- Leadership Team Box -->
+            <div class="card leadership">
+                <h3>Executive Boardroom</h3>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #94a3b8;">Our elite executive team operates with absolute precision.</p>
+                <ul>
+                    <li><span>Sosuke Aizen</span> — Chief Strategy Officer</li>
+                    <li><span>Light Yagami</span> — Head of Legal Counsel</li>
+                    <li><span>Makima</span> — Director of Human Resources</li>
+                    <li><span>Satoru Gojo</span> — Lead Angel Investor</li>
+                </ul>
+            </div>
+
+            <!-- The Puzzle Box -->
+            <div class="card">
+                <h3>Our Core Values</h3>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #94a3b8;">The foundation of Aethelgard Industries is built upon seven unshakeable pillars.</p>
+                <ul class="values-list">
+                    <li><strong>C</strong>ommitment to Excellence</li>
+                    <li><strong>Y</strong>ielding Maximum Results</li>
+                    <li><strong>A</strong>ccountability in All Sectors</li>
+                    <li><strong>N</strong>etwork Synergy</li>
+                    <li><strong>I</strong>nnovation Beyond Boundaries</li>
+                    <li><strong>D</strong>riven by Absolute Purpose</li>
+                    <li><strong>E</strong>mpowerment of Leadership</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hidden Trigger in Footer -->
+    <footer>
+        <p>Aethelgard Industries <span class="secret-trigger" onclick="openModal()">©</span> 2026. All rights reserved.</p>
+    </footer>
+
+    <!-- Secret Password Modal -->
+    <div id="override-modal">
+        <div class="modal-content">
+            <h3>SYSTEM OVERRIDE</h3>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">Enter authorization code to access restricted executive files.</p>
+            <input type="text" id="passcode" placeholder="Enter Code..." autocomplete="off">
+            <button onclick="checkCode()">VERIFY</button>
+            <p class="error-msg" id="error">ACCESS DENIED. Invalid Code.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('override-modal').style.display = 'flex';
+        }
+
+        function checkCode() {
+            const input = document.getElementById('passcode').value.toUpperCase().trim();
+            const error = document.getElementById('error');
+            
+            // The secret password derived from the Core Values Acrostic
+            if(input === "CYANIDE") {
+                // REDIRECT TO WEBSITE 2 (You will replace this URL later)
+                window.location.href = "https://aethelgard-team1-part2.vercel.app/"; 
+            } else {
+                error.style.display = 'block';
+                setTimeout(() => error.style.display = 'none', 2000);
+            }
+        }
+    </script>
+</body>
+</html>
